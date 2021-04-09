@@ -15,13 +15,35 @@ namespace LoginRegister.Services
     public class RegisterService : IRegisterService
     {
         private readonly IRepository<RegisterModel> _repository;
-        private readonly ICipherService _cipher;
-        public RegisterService(IRepository<RegisterModel> repository, ICipherService cipher)
+        private readonly ICipherService _cipherService;
+        public RegisterService(IRepository<RegisterModel> repository, ICipherService cipherService)
         {
             _repository = repository;
-            _cipher = cipher;
+            _cipherService = cipherService;
         }
 
+        public async Task<bool> ChangePassword(ViewChangePasswordModel ViewChangePasswordModel)
+        {
+            var result = await _repository.FetchSingleAsync(x => x.Email == ViewChangePasswordModel.Email);
+            //var solvedPas = _cipherService.Decrypt(result.Password1);
+
+            bool passwordDone = _cipherService.Decrypt(result.Password1) == ViewChangePasswordModel.OldPasword;
+            if (!passwordDone || ViewChangePasswordModel.Password != ViewChangePasswordModel.ConfirmPassword)
+            {
+                return false;
+            }
+
+            string protedPasword = _cipherService.Encrypt(ViewChangePasswordModel.Password);
+
+            result.Password1 = protedPasword;
+            _repository.Update(result);
+            
+
+
+            
+
+            return true;
+        }
 
         public async Task<bool> CreateUserAsync(ViewRegisterModel ViewRegisterModels)
         {
@@ -31,7 +53,7 @@ namespace LoginRegister.Services
             {
                 return false;
             }
-            string protedPasword = _cipher.Encrypt(ViewRegisterModels.Password1);
+            string protedPasword = _cipherService.Encrypt(ViewRegisterModels.Password1);
 
             var RegisterModel = new RegisterModel
             {
@@ -59,7 +81,7 @@ namespace LoginRegister.Services
         public async Task<RegisterModel> Login(ViewLoginModel ViewLoginModel)
         {
             var CryptPass = await _repository.FetchSingleAsync(x => x.Email == ViewLoginModel.Email);
-            var CozulmusSifre = _cipher.Decrypt(CryptPass.Password1);
+            var CozulmusSifre = _cipherService.Decrypt(CryptPass.Password1);
 
 
             var acceptLogin = await _repository.FetchSingleAsync(x => x.Email == ViewLoginModel.Email && CozulmusSifre == ViewLoginModel.Password);
@@ -69,9 +91,9 @@ namespace LoginRegister.Services
             }
 
             return acceptLogin;
-
-
         }
+
+
 
     }
 

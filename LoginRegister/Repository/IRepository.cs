@@ -15,5 +15,7 @@ namespace LoginRegister.Repository
 
         Task<T> GetbyId(int id);
 
+        T Update(T entity);
+
     }
 }

@@ -16,49 +16,49 @@ using System.Threading.Tasks;
 
 namespace LoginRegister.Controllers
 {
-    
-    
+
+
     public class HomeController : Controller
     {
         private readonly IRegisterService _registerService;
         private readonly ISmtpService _smtpService;
-        
+
         public HomeController(IRegisterService registerService, ISmtpService smtpService)
         {
             _registerService = registerService;
             _smtpService = smtpService;
         }
 
-       
-       
+
+
         public IActionResult Index()
         {
             return View();
         }
 
         [Authorize]
-        [HttpGet] 
+        [HttpGet]
         public IActionResult Privacy()
         {
-            
+
             return View();
         }
 
-        
+
         [HttpGet]
         public IActionResult RegisterAsync()
         {
-            
+
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> RegisterAsync(ViewRegisterModel ViewRegisterModels)
         {
 
             if (ViewRegisterModels.Password1 != ViewRegisterModels.Password2)
             {
-                
+
                 return RedirectToAction("Register");
             }
 
@@ -88,7 +88,7 @@ namespace LoginRegister.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         public async Task<IActionResult> Login(ViewLoginModel ViewLoginModel)
         {
@@ -97,7 +97,7 @@ namespace LoginRegister.Controllers
 
             if (result == null)
             {
-                //
+                return RedirectToAction("login");
             }
 
             List<Claim> userClaims = new List<Claim>()
@@ -121,7 +121,7 @@ namespace LoginRegister.Controllers
         [HttpGet]
         public IActionResult Forget()
         {
-           
+
             return View();
         }
 
@@ -129,10 +129,27 @@ namespace LoginRegister.Controllers
         [HttpPost]
         public async Task<IActionResult> Forget(ViewForgetModel viewForgetModel)
         {
-           await _smtpService.ForgetPasswordAsync(viewForgetModel.Email);
+            await _smtpService.ForgetPasswordAsync(viewForgetModel.Email);
             return RedirectToAction("login");
         }
 
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
 
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ViewChangePasswordModel viewChangePasswordModel)
+        {
+            if (await _registerService.ChangePassword(viewChangePasswordModel))
+            {
+                return RedirectToAction("Login");
+            }
+
+
+            return View();
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace LoginRegister.Services
     {
         Task<bool> CreateUserAsync(ViewRegisterModel ViewRegisterModels);
         Task<RegisterModel> Login(ViewLoginModel viewLoginModel);
+        Task<bool> ChangePassword(ViewChangePasswordModel ViewChangePasswordModel);
     }
 
 }

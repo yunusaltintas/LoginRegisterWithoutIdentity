@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace LoginRegister.ViewModels
 {
-    public class ViewForgetModel
+    public class ViewChangePasswordModel
     {
         public string Email { get; set; }
-        public int ForgetCode { get; set; }
-        public string Password1 { get; set; }
-        public string Password2 { get; set; }
+        public string OldPasword { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
 
     }
 }

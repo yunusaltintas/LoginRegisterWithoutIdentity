@@ -38,5 +38,15 @@ namespace LoginRegister.Repository
             return CryptPass;
         }
 
+        public T Update(T entity)
+        {
+            _db.Update(entity);
+            _Context.SaveChanges();
+
+            return entity;
+
+
+            
+        }
     }
 }

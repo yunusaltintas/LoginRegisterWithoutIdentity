@@ -18,9 +18,15 @@ namespace LoginRegister
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+
+            .ConfigureLogging((context, logging) => { 
+                logging.ClearProviders(); 
+                logging.AddFile(context.Configuration["LogPath"].ToString()); 
+            })
+
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

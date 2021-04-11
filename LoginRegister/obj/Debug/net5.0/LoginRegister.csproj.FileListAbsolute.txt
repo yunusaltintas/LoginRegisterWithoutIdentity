@@ -309,3 +309,11 @@ C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\obj\Debug
 C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\obj\Debug\net5.0\LoginRegister.pdb
 C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\obj\Debug\net5.0\LoginRegister.genruntimeconfig.cache
 C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\obj\Debug\net5.0\Razor\Views\Home\ChangePassword.cshtml.g.cs
+C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\bin\Debug\net5.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\bin\Debug\net5.0\Serilog.dll
+C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\bin\Debug\net5.0\Serilog.Extensions.Logging.File.dll
+C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\bin\Debug\net5.0\Serilog.Formatting.Compact.dll
+C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\bin\Debug\net5.0\Serilog.Sinks.Async.dll
+C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\bin\Debug\net5.0\Serilog.Sinks.File.dll
+C:\Users\yunus\source\repos\LoginRegisterWithoutIdentity\LoginRegister\bin\Debug\net5.0\Serilog.Sinks.RollingFile.dll

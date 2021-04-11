@@ -10,8 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,7 +32,10 @@ namespace LoginRegister
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddLogging();
+
             services.AddDbContext<LoginDbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
             {
@@ -47,8 +52,11 @@ namespace LoginRegister
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -61,6 +69,11 @@ namespace LoginRegister
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
+            
+
+
             app.UseStaticFiles();
 
             app.UseRouting();

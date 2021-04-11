@@ -70,9 +70,17 @@
               "target": "Package",
               "version": "[5.0.5, )"
             },
+            "Microsoft.IO.RecyclableMemoryStream": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Serilog.Extensions.Logging.File": {
+              "target": "Package",
+              "version": "[2.0.0, )"
             }
           },
           "imports": [

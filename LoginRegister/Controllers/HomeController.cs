@@ -92,7 +92,7 @@ namespace LoginRegister.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(ViewLoginModel ViewLoginModel)
         {
-
+           
             var result = await _registerService.Login(ViewLoginModel);
 
             if (result == null)
@@ -104,7 +104,7 @@ namespace LoginRegister.Controllers
             {
             new Claim(ClaimTypes.NameIdentifier, result.Id.ToString()),
             new Claim(ClaimTypes.Name, result.UserName),
-            new Claim(ClaimTypes.Email, result.Email.ToString()),
+            new Claim(ClaimTypes.Email, result.Email.ToString())
             };
             var identity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
 

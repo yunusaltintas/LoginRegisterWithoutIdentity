@@ -37,22 +37,22 @@ namespace LoginRegister.Services
             smtp.EnableSsl = true;
 
 
-            NetworkCredential kullanicibilgi = new NetworkCredential("denemeyea@gmail.com", "yea123456");
+            NetworkCredential kullanicibilgi = new NetworkCredential("denemeyea@gmail.com", "Pasword");
             smtp.Credentials = kullanicibilgi;
 
 
             MailAddress gonderen = new MailAddress("denemeyea@gmail.com");
-            //Maili atacak kişinin adresi
+           
             MailAddress alici = new MailAddress(Email);
-            //Maili alacak kişinin adresini yazdık.
+           
             MailMessage mail = new MailMessage(gonderen, alici);
-            //MailMessage nesnemizi oluşturduk.MailAddress tipinden istediği gonderen ve alici nesnelerini, bu constructorından bağladık.
+           
             mail.Subject = "Şifre Hatırlatma";
             mail.Body = "şifreniz="+solvedPas;
             mail.IsBodyHtml = true;
-            //Mail'de html kod kullanılsın mı?True evet,False hayır.
+            
             smtp.Send(mail);
-            //Son olarak SmtpClient tipindeki smtp nesnemiz sayesinde, MailMessage tipindeki mail nesnemiz ilgili adrese, gonderen adıyla iletiliyor.
+            
 
 
 
